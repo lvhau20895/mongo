@@ -18,7 +18,7 @@
 
 		<script>
 			// https <=> wss or http <=> ws
-			const socket = io("https://socket-chat-h1w5.onrender.com/");
+			const socket = io("https://socket-chat-eight.vercel.app/");
 			socket.on("fe-connect", data => {
 				document.querySelector("#noiDung").innerHTML +=
 					data + " đã kết nối <br/>";
