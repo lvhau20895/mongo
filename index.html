@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<h1>Front End</h1>
+		<h1 id="noiDung"></h1>
+		<button id="btn-click">Click</button>
+		<script
+			src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+			integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+			crossorigin="anonymous"
+		></script>
+
+		<script>
+			// https <=> wss or http <=> ws
+			const socket = io("ws://localhost:1234");
+			socket.on("fe-connect", data => {
+				document.querySelector("#noiDung").innerHTML +=
+					data + " đã kết nối <br/>";
+			});
+
+			socket.on("fe-dis", data => {
+				document.querySelector("#noiDung").innerHTML +=
+					data + " đã thoát <br/>";
+			});
+
+			document.querySelector("#btn-click").onclick = () => {
+				socket.emit("client to server", "");
+			};
+
+			socket.on("server to client", number => {
+				document.querySelector("#noiDung").innerHTML = number;
+			});
+		</script>
+	</body>
+</html>
